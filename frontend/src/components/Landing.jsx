@@ -35,7 +35,7 @@ const Landing = () => {
 
       <img src={landingImg} alt='land-img' className='max-h-full absolute left-14' />
 
-      <div className='h-fit w-1/3 bg-w/40 dark:bg-b/40 backdrop-blur-md absolute right-36 top-1/2 -translate-y-1/2 rounded-lg  px-10'>
+      <div className='h-fit w-1/3 bg-w/40 dark:bg-b/40 backdrop-blur-3xl absolute right-36 top-1/2 -translate-y-1/2 rounded-lg  px-10'>
         <Routes>
           <Route exact path="/*" element={ <LoginForm/> } />
           <Route exact path="/register" element={ <RegisterForm /> } />

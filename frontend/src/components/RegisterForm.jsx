@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 const RegisterForm = () => {
   return (
     <div className='flex flex-col h-full w-full text-pd py-16 dark:text-p'>
-        <input type='text' className='w-full p-3 bg-wd rounded-md mb-8 dark:bg-bd' name='name' placeholder='Full Name'></input>
-        <input type='text' className='w-full p-3 bg-wd rounded-md mb-8 dark:bg-bd' name='user' placeholder='Username'></input>
-        <input type='text' className='w-full p-3 bg-wd rounded-md mb-8 dark:bg-bd' name='bio' placeholder='bio'></input>
-        <input type='password' className='w-full p-3 bg-wd rounded-md mb-8 dark:bg-bd' name='pwd' placeholder='Password'></input>
+        <input type='text' className='w-full bg-w p-3 rounded-md mb-4 dark:bg-b' name='name' placeholder='Full Name'></input>
+        <input type='text' className='w-full bg-w p-3 rounded-md mb-4 dark:bg-b' name='user' placeholder='Username'></input>
+        <input type='text' className='w-full bg-w p-3 rounded-md mb-4 dark:bg-b' name='bio' placeholder='bio'></input>
+        <input type='password' className='w-full bg-w p-3 rounded-md mb-4 dark:bg-b' name='pwd' placeholder='Password'></input>
 
 
 

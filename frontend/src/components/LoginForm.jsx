@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 const LoginForm = () => {
   return (
       <div className='flex flex-col h-full w-full text-pd dark:text-p py-16'>
-        <input type='text' className='w-full p-3 bg-wd dark:bg-bd rounded-md mb-8' name='user' placeholder='Username'></input>
-        <input type='password' className='w-full p-3 bg-wd dark:bg-bd rounded-md mb-8' name='pwd' placeholder='Password'></input>
+        <input type='text' className='w-full bg-w p-3 rounded-md mb-4 dark:bg-b' name='user' placeholder='Username'></input>
+        <input type='password' className='w-full bg-w p-3 rounded-md mb-4 dark:bg-b' name='pwd' placeholder='Password'></input>
 
 
         <p className='text-red font-bold mb-4'> </p>
