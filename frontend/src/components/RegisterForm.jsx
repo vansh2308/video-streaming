@@ -13,7 +13,9 @@ const RegisterForm = () => {
 
         <p className='text-red font-bold mb-4'> </p>
         <div className='font-semibold'>
-          <button type='submit' className='px-8 py-3 rounded-md text-w bg-pd mr-4 dark:bg-p'>Register</button>
+          <Link to="/">
+            <button type='submit' className='px-8 py-3 rounded-md text-w bg-pd mr-4 dark:bg-p'>Register</button>
+          </Link>
           <Link className='text-sm underline underline-offset-8' to="/" > Already registered? </Link>
 
         </div>

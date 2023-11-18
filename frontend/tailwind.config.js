@@ -6,8 +6,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      
+    extend: {      
     }, 
     colors: {
       "pd": "#52218C",
@@ -16,7 +15,10 @@ export default {
       "p": "#9B46FF",
       "b": "#040A20",
       "bd": "#171D35",
-      "red": "#b91c1c"
+      "red": "#b91c1c",
+      "teal": "#5eead4",
+      "pink": "#d946ef",
+      "yl": "#eab308"
     }
   },
   plugins: [],

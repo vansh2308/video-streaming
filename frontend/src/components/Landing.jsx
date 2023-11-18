@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import landingImg from "./../assets/landing-img.png"
 import LoginForm from './LoginForm'
-import { Route, Routes } from 'react-router'
+import { Outlet, Route, Routes } from 'react-router'
 import RegisterForm from './RegisterForm'
 
 
@@ -22,8 +22,8 @@ const Landing = () => {
 
   return (
     <div className='w-screen h-screen bg-wd dark:bg-bd relative overflow-hidden'>
-      <div className='w-1/3 bg-pd dark:bg-p opacity-30 aspect-square absolute -bottom-10 -left-24 rounded-full blur-3xl' />
-      <div className='w-1/2 bg-pd dark:bg-p opacity-20 aspect-square absolute -top-36 -right-40 rounded-full blur-3xl' />
+      <div className='w-1/3 bg-pd dark:bg-p opacity-30 dark:blur-[150px] aspect-square absolute -bottom-10 -left-24 rounded-full blur-3xl' />
+      <div className='w-1/2 bg-pd dark:bg-p opacity-20 dark:blur-[150px] aspect-square absolute -top-36 -right-40 rounded-full blur-3xl' />
 
 
       <div className='px-20 absolute top-1/2'>
@@ -36,11 +36,7 @@ const Landing = () => {
       <img src={landingImg} alt='land-img' className='max-h-full absolute left-14' />
 
       <div className='h-fit w-1/3 bg-w/40 dark:bg-b/40 backdrop-blur-3xl absolute right-36 top-1/2 -translate-y-1/2 rounded-lg  px-10'>
-        <Routes>
-          <Route exact path="/*" element={ <LoginForm/> } />
-          <Route exact path="/register" element={ <RegisterForm /> } />
-        </Routes>
-
+        <Outlet />
       </div>
       
     </div>
