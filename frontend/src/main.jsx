@@ -12,6 +12,8 @@ import User from './components/User.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import Profile from './components/Profile.jsx';
 import Manage from './components/Manage.jsx';
+import DefaultViewer from './components/DefaultViewer.jsx';
+import VideoViewer from './components/VideoViewer.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +40,17 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/:user/",
-            element: <Dashboard />
+            element: <Dashboard />,
+            children: [
+              {
+                path: "/:user/",
+                element: <DefaultViewer />
+              }, 
+              {
+                path: "/:user/:vid",
+                element: <VideoViewer />
+              }
+            ]
           }, 
           {
             path: "/:user/profile",

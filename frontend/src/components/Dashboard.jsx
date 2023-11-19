@@ -1,11 +1,12 @@
 import React from 'react'
 import { FaSearch } from "react-icons/fa"
-// import Thumbnail from './Thumbnail'
 import { IoAddCircle } from "react-icons/io5";
+import { Outlet, useNavigate } from 'react-router';
 
 
 
 const Dashboard = () => {
+  
   return (
     <div className='w-full flex flex-col h-full'>
 
@@ -15,8 +16,15 @@ const Dashboard = () => {
       </div>
 
       <div className='flex py-10 h-full'>
+        
+        <div className='w-4/6 h-full overflow-scroll'>
+          {/* <DefaultViewer /> */}
+          {/* <VideoViewer /> */}
 
-        <DefaultViewer />
+          <Outlet />
+
+
+        </div>
 
         <div className='flex w-2/6 h-full flex-col overflow-scroll ml-10 '>
           <Thumbnail />
@@ -39,31 +47,10 @@ const Dashboard = () => {
 export default Dashboard
 
 
-function DefaultViewer(props) {
-  return (
-    <div className='w-4/6 h-fit'>
-      <div className='w-full h-[20rem] rounded-xl tagline-wrapper relative overflow-hidden '>
-        <div className="absolute mask h-full w-full " />
-        <div className='absolute text-w bottom-8 left-8'>
-          <h2 className=' font-extrabold text-5xl tracking-wider mb-4' >UNPAUSED</h2>
-          <h4 className=' font-normal text-xl w-3/4'>Jaw dropping videos on your way, uninterrupted </h4>
-        </div>
-      </div>
-
-      <div className='w-5/6 leading-relaxed font-light mt-10'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  )
-}
-
-
-
-
-
 const Thumbnail = () => {
+  const navigate = useNavigate()
   return (
-    <div className='w-full flex-shrink-0 h-fit mb-8'>
+    <div className='w-full flex-shrink-0 h-fit mb-8' onClick={()=>{ navigate("/:user/:vid")}}>
       <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' />
       <div className='flex justify-between mt-3 px-2'>
         <div>
@@ -80,3 +67,4 @@ const Thumbnail = () => {
     </div>
   )
 }
+

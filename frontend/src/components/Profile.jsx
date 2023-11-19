@@ -8,7 +8,8 @@ const Profile = () => {
       <div className='flex   w-3/5 mb-8'>
         <div className=' bg-wd h-20 aspect-square rounded-full border-2 border-pd mr-8' />
         <div className='flex flex-col'>
-          <h3 className='font-semibold text-xl mb-4 text-pd dark:text-p'> Vansh2308 </h3>
+          <h3 className='font-semibold text-xl text-pd dark:text-p'> Vansh Agarwal </h3>
+          <h4 className=' text-sm mb-4 '> @vansh2308 </h4>
           <p className='font-light text-sm'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, deserunt. Qui, eos voluptates. Similique nulla sunt qui temporibus eveniet dolorum facere accusamus, quis modi architecto neque incidunt, dignissimos quaerat beatae? </p>
         </div>
       </div>
