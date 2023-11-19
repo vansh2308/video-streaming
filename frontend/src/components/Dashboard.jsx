@@ -1,6 +1,8 @@
 import React from 'react'
 import { FaSearch } from "react-icons/fa"
-import Thumbnail from './Thumbnail'
+// import Thumbnail from './Thumbnail'
+import { IoAddCircle } from "react-icons/io5";
+
 
 
 const Dashboard = () => {
@@ -51,6 +53,30 @@ function DefaultViewer(props) {
       <div className='w-5/6 leading-relaxed font-light mt-10'>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
+    </div>
+  )
+}
+
+
+
+
+
+const Thumbnail = () => {
+  return (
+    <div className='w-full flex-shrink-0 h-fit mb-8'>
+      <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' />
+      <div className='flex justify-between mt-3 px-2'>
+        <div>
+          <p className='font-bold' >Title</p>
+          <p className='font-light text-xs'>Channel Name </p>
+
+        </div>
+        <button>
+          <IoAddCircle className='text-2xl' />
+        </button>
+      </div>
+
+
     </div>
   )
 }

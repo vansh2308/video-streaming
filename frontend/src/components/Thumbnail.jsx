@@ -1,5 +1,4 @@
 import React from 'react'
-import { IoAddCircle } from "react-icons/io5";
 
 const Thumbnail = () => {
   return (
@@ -9,12 +8,13 @@ const Thumbnail = () => {
         <div>
           <p className='font-bold' >Title</p>
           <p className='font-light text-xs'>Channel Name </p>
-
         </div>
         <button>
           <IoAddCircle className='text-2xl' />
         </button>
       </div>
+
+
 
 
     </div>
