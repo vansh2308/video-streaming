@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink} from 'react-router-dom'
 import { BiSolidDashboard } from "react-icons/bi";
 import { IoPerson } from "react-icons/io5";
@@ -6,22 +6,29 @@ import { MdEdit } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 import { useState } from 'react';
 import { Outlet } from 'react-router';
+import { useDispatch, useSelector } from "react-redux"
+import { toggle } from "./../features/themeSlice"
+import { useRef } from 'react';
 
 
 
 const User = () => {
-  const [theme, setTheme] = useState("light")
+
+  // theme functionality 
+  const theme = useSelector(state => state.theme.value)
+  const dispatch = useDispatch()
+  const toggleButton = useRef(null)
+
+  useEffect(() => {
+    toggleButton.current.style.justifyContent = theme === "light" ? "flex-start" : "flex-end";
+  }, [theme])
   const toggleTheme = (e) => {
     if(theme == "light"){
-      e.target.style.justifyContent = "flex-end"
       document.documentElement.classList.add('dark')
-      setTheme("dark")
     } else {
-      e.target.style.justifyContent = "flex-start"
       document.documentElement.classList.remove('dark')
-      setTheme("light")
     }
-    
+    dispatch(toggle())
   }
 
   return (
@@ -62,8 +69,8 @@ const User = () => {
         </nav>
 
 
-        <button className='absolute mt-10 bg-pd dark:bg-p h-8 w-16 rounded-full p-1 z-40 flex bottom-16' onClick={toggleTheme}>
-          <div className='h-full aspect-square rounded-full bg-wd dark:bg-bd'></div>
+        <button className='absolute mt-10 bg-pd dark:bg-p h-8 w-16 rounded-full p-1 z-40 flex bottom-16' ref={toggleButton} onClick={toggleTheme}>
+          <div className='h-full aspect-square rounded-full bg-wd dark:bg-bd' ></div>
         </button>
       </div>
 

@@ -18,12 +18,7 @@ const Dashboard = () => {
       <div className='flex py-10 h-full'>
         
         <div className='w-4/6 h-full overflow-scroll'>
-          {/* <DefaultViewer /> */}
-          {/* <VideoViewer /> */}
-
           <Outlet />
-
-
         </div>
 
         <div className='flex w-2/6 h-full flex-col overflow-scroll ml-10 '>
