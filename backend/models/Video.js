@@ -46,11 +46,26 @@ const videoSchema = new Schema({
     },
     kind: String,
     statistics: {
-      commentCount: Number,
-      viewCount: Number,
-      favoriteCount: Number,
-      dislikeCount: Number, 
-      likeCount: Number
+      commentCount: {
+        type: Number,
+        default: 0
+      },
+      viewCount: {
+        type: Number,
+        default: 0
+      },
+      favoriteCount: {
+        type: Number,
+        default: 0
+      },
+      likeCount: {
+        type: Number,
+        default: 0
+      },
+      dislikeCount: {
+        type: Number,
+        default: 0
+      }
     },
     etag: String,
     id: String
