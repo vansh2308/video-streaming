@@ -1,5 +1,5 @@
 const Video = require("./../models/Video")
-
+const { connection } = require("./../config/mysql")
 
 const getAllVideos = async (req, res) => {
   const query = req.body.query
@@ -34,4 +34,17 @@ const getVideoByIDS = async (req, res) => {
   
 }
 
-module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIDS }
+
+const logClick = async (req, res) => {
+  const username = req.body.username;
+  const vidID = req.body.id
+  const dateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  const sql = `INSERT INTO clicks (username, video_id, time) VALUES ('${username}', '${vidID}', '${dateTime}')`
+  connection.query(sql, function(err, res){
+    if(err) console.log(err)
+  })
+
+  return res.status(200).json({"msg": "click logged!"})
+}
+
+module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIDS, logClick }

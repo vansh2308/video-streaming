@@ -34,6 +34,18 @@ const User = () => {
 
   const user = useSelector(state => state.user.value)
 
+  const handleLogout = async (e) => {
+    console.log(user.username)
+    await fetch("http://localhost:3500/logout", {
+      method: "POST",
+      mode: "cors",
+      headers: {  "Content-Type": "application/json", },
+      body: JSON.stringify({
+        username: user.username
+      })
+    })
+  }
+
   return (
     <div className='w-screen h-screen flex relative overflow-hidden bg-w dark:bg-b'>
       <div className='h-1/3 bg-pd dark:bg-p aspect-square absolute -bottom-16 -left-32 rounded-full' />
@@ -65,7 +77,7 @@ const User = () => {
             <MdEdit className='mr-4 text-xl' />
             Manage Videos
           </NavLink>
-          <NavLink to="/" className={({ isActive })=>(isActive ? "flex items-center mb-7 font-semibold text-pd dark:text-p" : "flex items-center mb-7")} >
+          <NavLink to="/"  onClick={handleLogout} className={({ isActive })=>(isActive ? "flex items-center mb-7 font-semibold text-pd dark:text-p" : "flex items-center mb-7")} >
             <IoLogOut className='mr-4 text-xl' />
             Logout
           </NavLink>

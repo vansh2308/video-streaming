@@ -1,8 +1,8 @@
 const User = require("./../models/User")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
+const { connection } = require("./../config/mysql")
 require("dotenv").config()
-
 
 
 
@@ -16,6 +16,12 @@ const handleLogin = async (req, res) => {
   const match = await bcrypt.compare(pwd, foundUser.password)
   if(!match){return res.status(401).json({"msg": "Wrong credentials!"})}
   if (match) {
+    const dateTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    const sql = `INSERT INTO logs(username, mode, time) VALUES('${username}', 'login', '${dateTime}')`
+    connection.query(sql, function(err, res){
+      if(err) console.log(err)
+    })
+
     const accessToken = jwt.sign(
       { username: foundUser.username },
       process.env.ACCESS_TOKEN_SECRET,

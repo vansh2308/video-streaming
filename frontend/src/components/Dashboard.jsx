@@ -5,7 +5,6 @@ import { Outlet, useNavigate } from 'react-router';
 import { setVideoList } from '../features/videoListSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentVideo } from '../features/currentVideoSlice';
-
 const Dashboard = () => {
 
   const dispatch = useDispatch()
@@ -87,6 +86,16 @@ const Thumbnail = ({ video }) => {
       })
     })
 
+    await fetch("http://localhost:3500/videos/logClick", {
+      method: "POST",
+      mode: "cors",
+      headers: {"Content-Type": "application/json",},
+      body: JSON.stringify({
+        username: user.username,
+        id: newVideo.videoInfo.id
+      })
+    })
+
     const newVideolist = await fetch("http://localhost:3500/videos", {
       method: "POST",
       mode: "cors",
@@ -101,10 +110,6 @@ const Thumbnail = ({ video }) => {
   }
 
 
-  const addToWatchLater = async (e) => {
-    e.preventDefault();
-    
-  }
 
 
   return (
@@ -115,7 +120,7 @@ const Thumbnail = ({ video }) => {
           <p className='font-bold mb-2' >{title ? title : "Title"}</p>
           <p className='font-light text-xs'>{channelTitle ? channelTitle : "Channel Title"} </p>
         </div>
-        <button onClick={addToWatchLater}>
+        <button>
           <IoAddCircle className='text-2xl' />
         </button>
       </div>
