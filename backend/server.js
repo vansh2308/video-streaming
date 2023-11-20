@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 app.use("/login", require("./routes/login"))
 app.use("/register", require("./routes/register"))
+app.use("/videos", require("./routes/getVideos"))
 
 
 mongoose.connection.once('open', () => {

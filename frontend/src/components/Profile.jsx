@@ -9,7 +9,7 @@ const Profile = () => {
   return (
     <div className='w-full h-full overflow-scroll' >
       <div className='flex   w-3/5 mb-8'>
-        <div className=' bg-wd h-20 aspect-square rounded-full border-2 border-pd mr-8' />
+        <div className=' bg-wd dark:bg-bd h-20 aspect-square rounded-full border-2 border-pd mr-8' />
         <div className='flex flex-col'>
           <h3 className='font-semibold text-xl text-pd dark:text-p'> {currentUser.name} </h3>
           <h4 className=' text-sm mb-4 '> @{currentUser.username} </h4>
