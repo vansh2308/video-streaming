@@ -31,6 +31,9 @@ const User = () => {
     dispatch(toggle())
   }
 
+
+  const user = useSelector(state => state.user.value)
+
   return (
     <div className='w-screen h-screen flex relative overflow-hidden bg-w dark:bg-b'>
       <div className='h-1/3 bg-pd dark:bg-p aspect-square absolute -bottom-16 -left-32 rounded-full' />
@@ -44,7 +47,7 @@ const User = () => {
 
           <div className='text-md '>
             <span className='text-pd dark:text-p font-bold'> Welcome </span>
-            <p className='text-sm'>Vansh2308</p>
+            <p className='text-sm'>{user.username}</p>
           </div>
         </div>
 

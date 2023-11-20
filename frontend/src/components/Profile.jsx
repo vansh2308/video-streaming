@@ -1,16 +1,19 @@
 import React from 'react'
 import { IoTrashBin } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
+  const currentUser = useSelector(state => state.user.value)
+
   return (
-    <div className='w-full h-full ' >
+    <div className='w-full h-full overflow-scroll' >
       <div className='flex   w-3/5 mb-8'>
         <div className=' bg-wd h-20 aspect-square rounded-full border-2 border-pd mr-8' />
         <div className='flex flex-col'>
-          <h3 className='font-semibold text-xl text-pd dark:text-p'> Vansh Agarwal </h3>
-          <h4 className=' text-sm mb-4 '> @vansh2308 </h4>
-          <p className='font-light text-sm'> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, deserunt. Qui, eos voluptates. Similique nulla sunt qui temporibus eveniet dolorum facere accusamus, quis modi architecto neque incidunt, dignissimos quaerat beatae? </p>
+          <h3 className='font-semibold text-xl text-pd dark:text-p'> {currentUser.name} </h3>
+          <h4 className=' text-sm mb-4 '> @{currentUser.username} </h4>
+          <p className='font-light text-sm'>{currentUser.bio}</p>
         </div>
       </div>
 

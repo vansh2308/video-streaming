@@ -33,7 +33,7 @@ export default Manage
 
 function UploadWrapper(props) {
   return (
-    <div className='w-4/6 h-fit'>
+    <div className='w-4/6 h-full overflow-scroll pb-16'>
       <p className='font-bold text-lg mb-4' >Create Videos</p>
       <div className='w-full h-[20rem] mb-8 rounded-xl bg-wd dark:bg-bd relative overflow-hidden flex items-center justify-center'>
         <button className='py-3 px-6 border-2 border-pd dark:border-p rounded-xl text-pd dark:text-p font-semibold'>
@@ -46,10 +46,6 @@ function UploadWrapper(props) {
       <input type='text' placeholder='Tags' name='tags' className='py-4 px-8 bg-wd dark:bg-bd rounded-md w-full mb-4' /> 
 
       <button type='submit' className='my-8 bg-pd dark:bg-p py-3 px-6 rounded-xl font-bold'>Submit</button>
-
-
-
-      
     </div>
   )
 }
