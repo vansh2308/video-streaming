@@ -19,7 +19,7 @@ const userSchema = new Schema({
     required: true
   },
   refreshToken: String,
-  likedVideos: [String],
+  watchLater: [String],
   createdVideos: [String]
 })
 

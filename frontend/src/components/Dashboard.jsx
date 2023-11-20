@@ -4,17 +4,27 @@ import { IoAddCircle } from "react-icons/io5";
 import { Outlet, useNavigate } from 'react-router';
 import { setVideoList } from '../features/videoListSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from "react-router-dom"
 import { setCurrentVideo } from '../features/currentVideoSlice';
 
 const Dashboard = () => {
 
+  const dispatch = useDispatch()
   const videoList = useSelector(state => state.videoList.value)
 
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target)
-    setQuery(data.get("search"))
+    const query = new FormData(e.target)
+    let res = await fetch("http://localhost:3500/videos", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        "query": query.get("search")
+      })
+    })
+
+    res = await res.json();
+    dispatch(setVideoList(res))
   }
 
 
@@ -35,10 +45,9 @@ const Dashboard = () => {
         <div className='flex w-2/6 h-full flex-col overflow-scroll ml-10 '>
           {
             videoList.map((video, key) => {
-              console.log(video.videoInfo?.snippet?.title)
               return (
                 <Thumbnail
-                  video = {video}
+                  video={video}
                   key={key}
                 />
               )
@@ -78,31 +87,35 @@ const Thumbnail = ({ video }) => {
       })
     })
 
-
     const newVideolist = await fetch("http://localhost:3500/videos", {
       method: "POST",
       mode: "cors",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: ""
       })
     })
-    dispatch(setVideoList( await newVideolist.json() ))
+    dispatch(setVideoList(await newVideolist.json()))
     dispatch(setCurrentVideo(newVideo))
     navigate(`/${user.username}/${videoID}`)
   }
 
+
+  const addToWatchLater = async (e) => {
+    e.preventDefault();
+    
+  }
+
+
   return (
-    <div className='w-full flex-shrink-0 h-fit mb-8' onClick={handleViewVideo}>
-      <Link>
-        <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' />
-      </Link>
+    <div className='w-full flex-shrink-0 h-fit mb-8' >
+      <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' onClick={handleViewVideo} />
       <div className='flex justify-between mt-3 px-2 items-start'>
         <div className='w-5/6'>
           <p className='font-bold mb-2' >{title ? title : "Title"}</p>
           <p className='font-light text-xs'>{channelTitle ? channelTitle : "Channel Title"} </p>
         </div>
-        <button>
+        <button onClick={addToWatchLater}>
           <IoAddCircle className='text-2xl' />
         </button>
       </div>

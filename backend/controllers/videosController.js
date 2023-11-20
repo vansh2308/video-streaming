@@ -3,13 +3,11 @@ const Video = require("./../models/Video")
 
 const getAllVideos = async (req, res) => {
   const query = req.body.query
-  const videos = await Video.find({})
+  let videos = await Video.find({})
   if(query != ""){
-    videos.filter((video) => {
-      return video
-    })
+    videos = await Video.find({"videoInfo.snippet.title": {$regex: `${query}`, $options: 'i'}})
   }
-  return res.status(200).json(videos)
+  return res.status(200).json(videos.slice(0, 10))
 }
 
 
@@ -28,4 +26,12 @@ const getVideoByID = async (req, res) => {
   return res.status(200).json(vid)
 }
 
-module.exports = { getAllVideos, updateVideoByID, getVideoByID }
+
+const getVideoByIDS = async (req, res) => {
+  const idList  = req.body.ids;
+  const vidList = await Video.find({"videoInfo.id": {$in: idList}})
+  return res.status(200).json(vidList)
+  
+}
+
+module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIDS }

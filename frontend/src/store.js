@@ -9,6 +9,6 @@ export default configureStore({
     theme: themeReducer,
     user: userReducer,
     videoList: videoListReducer,
-    currentVideo: currentVideoReducer
+    currentVideo: currentVideoReducer,
   }
 })

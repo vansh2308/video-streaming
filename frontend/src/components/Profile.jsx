@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { IoTrashBin } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -20,7 +20,6 @@ const Profile = () => {
 
       <p className='text-md my-4 font-semibold'>Watch Later</p>
       <div className='flex overflow-scroll'>
-        <Thumbnail />
         <Thumbnail />
         <Thumbnail />
         <Thumbnail />
@@ -49,14 +48,15 @@ export default Profile
 
 
 
-const Thumbnail = () => {
+const Thumbnail = ({video}) => {
+
   return (
     <div className='w-72 mr-4  flex-shrink-0 h-fit mb-8'>
       <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' />
       <div className='flex justify-between mt-3 px-2'>
         <div>
           <p className='font-bold' >Title</p>
-          <p className='font-light text-xs'>Channel Name </p>
+          <p className='font-light text-xs'>Channel Title </p>
         </div>
         <button>
           <IoTrashBin  className='text-lg' />
