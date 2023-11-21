@@ -36,7 +36,7 @@ const User = () => {
 
   const handleLogout = async (e) => {
     console.log(user.username)
-    await fetch("http://localhost:3500/logout", {
+    await fetch("http://172.31.26.175:3500/logout", {
       method: "POST",
       mode: "cors",
       headers: {  "Content-Type": "application/json", },

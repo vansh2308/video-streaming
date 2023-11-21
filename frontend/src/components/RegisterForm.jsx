@@ -15,7 +15,7 @@ const RegisterForm = () => {
       pwd: data.get("pwd"),
       bio: data.get("bio") ? data.get("bio") : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, deserunt. Qui, eos voluptates. Similique nulla sunt qui temporibus eveniet dolorum facere accusamus, quis modi architecto neque incidunt, dignissimos quaerat beatae?"
     }
-    const response = await fetch("http://localhost:3500/register", {
+    const response = await fetch("http://172.31.26.175:3500/register", {
       method: "POST",
       mode: "cors",
       headers: {

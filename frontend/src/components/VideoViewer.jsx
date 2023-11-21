@@ -6,21 +6,34 @@ import { AiFillDislike } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentVideo  } from "../features/currentVideoSlice";
 import { setVideoList } from "../features/videoListSlice";
+import { setUser } from "../features/userSlice";
 
 export default function VideoViewer(props) {
   const currentVideo = useSelector(state => state.currentVideo.value)
   const title = currentVideo.videoInfo?.snippet?.title
   const channelTitle = currentVideo.videoInfo?.snippet?.channelTitle
-  const publishDate = (currentVideo.videoInfo?.snippet?.publishedAt)
+  const publishDate = currentVideo.videoInfo?.snippet?.publishedAt
   const stats = currentVideo.videoInfo?.statistics
   const desc = currentVideo.videoInfo?.snippet?.description
   const dispatch = useDispatch()
+  const currUser = useSelector(state => state.user.value)
+
   
   const handleLike = async (e) => {
     e.preventDefault()
+    if(currUser.likedVideos.includes(currentVideo.videoInfo?.id)) return
+    
     let newVideo = JSON.parse(JSON.stringify(currentVideo))
+    let newUser = JSON.parse(JSON.stringify(currUser))
     newVideo.videoInfo.statistics.likeCount += 1;
-    await fetch("http://localhost:3500/videos/updateVideo", {
+    newUser.likedVideos.push(currentVideo.videoInfo?.id)
+    if(currUser.dislikedVideos.includes(currentVideo.videoInfo?.id)) {
+      newVideo.videoInfo.statistics.dislikeCount -= 1; 
+      newUser.dislikedVideos.pop(currentVideo.videoInfo?.id)
+    }
+
+
+    await fetch("http://172.31.26.175:3500/videos/updateVideo", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -31,7 +44,7 @@ export default function VideoViewer(props) {
         newVideo: newVideo
       })
     })
-    const newVideolist = await fetch("http://localhost:3500/videos", {
+    const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -39,16 +52,38 @@ export default function VideoViewer(props) {
         query: ""
       })
     })
+    
+    await fetch("http://172.31.26.175:3500/user", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: currUser.username,
+        newUser: newUser
+      })
+    })
+
+
     dispatch(setVideoList(await newVideolist.json()))
     dispatch(setCurrentVideo(newVideo))
+    dispatch(setUser(newUser))
   }
   
   
   const handleDislike = async (e) => {
     e.preventDefault()
+    if(currUser.dislikedVideos.includes(currentVideo.videoInfo?.id)) return
+
     let newVideo = JSON.parse(JSON.stringify(currentVideo))
+    let newUser = JSON.parse(JSON.stringify(currUser))
     newVideo.videoInfo.statistics.dislikeCount += 1;
-    await fetch("http://localhost:3500/videos/updateVideo", {
+    newUser.dislikedVideos.push(currentVideo.videoInfo?.id)
+    if(currUser.likedVideos.includes(currentVideo.videoInfo?.id)) {
+      newVideo.videoInfo.statistics.likeCount -= 1; 
+      newUser.likedVideos.pop(currentVideo.videoInfo?.id)
+    }
+
+    await fetch("http://172.31.26.175:3500/videos/updateVideo", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -59,7 +94,7 @@ export default function VideoViewer(props) {
         newVideo: newVideo
       })
     })
-    const newVideolist = await fetch("http://localhost:3500/videos", {
+    const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -67,8 +102,23 @@ export default function VideoViewer(props) {
         query: ""
       })
     })
+
+    await fetch("http://172.31.26.175:3500/user", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: currUser.username,
+        newUser: newUser
+      })
+    })
+    
+
     dispatch(setVideoList(await newVideolist.json()))
     dispatch(setCurrentVideo(newVideo))
+    dispatch(setUser(newUser))
+
+    
   }
 
 
@@ -77,7 +127,11 @@ export default function VideoViewer(props) {
 
   return (
     <div>
-      <div className='w-full h-[20rem] rounded-xl bg-wd dark:bg-bd relative overflow-hidden '> </div>
+      <div className='w-full h-[20rem] rounded-xl bg-wd dark:bg-bd relative overflow-hidden '
+        style={{
+          background: `url(${currentVideo.videoInfo?.snippet?.thumbnails?.high?.url})` 
+        }}
+      > </div>
 
       <div className='w-full  leading-relaxed font-light mt-10'>
         <h2 className='font-bold text-2xl mb-4'>{title}</h2>

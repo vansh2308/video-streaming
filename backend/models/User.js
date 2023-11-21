@@ -20,7 +20,9 @@ const userSchema = new Schema({
   },
   refreshToken: String,
   watchLater: [String],
-  createdVideos: [String]
+  createdVideos: [String],
+  likedVideos: [String],
+  dislikedVideos: [String]
 })
 
 module.exports = mongoose.model('User', userSchema)

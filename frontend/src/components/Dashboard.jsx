@@ -13,7 +13,7 @@ const Dashboard = () => {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     const query = new FormData(e.target)
-    let res = await fetch("http://localhost:3500/videos", {
+    let res = await fetch("http://172.31.26.175:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -74,7 +74,7 @@ const Thumbnail = ({ video }) => {
     e.preventDefault()
     let newVideo = JSON.parse(JSON.stringify(video))
     newVideo.videoInfo.statistics.viewCount += 1;
-    await fetch("http://localhost:3500/videos/updateVideo", {
+    await fetch("http://172.31.26.175:3500/videos/updateVideo", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -86,7 +86,7 @@ const Thumbnail = ({ video }) => {
       })
     })
 
-    await fetch("http://localhost:3500/videos/logClick", {
+    await fetch("http://172.31.26.175:3500/videos/logClick", {
       method: "POST",
       mode: "cors",
       headers: {"Content-Type": "application/json",},
@@ -96,7 +96,7 @@ const Thumbnail = ({ video }) => {
       })
     })
 
-    const newVideolist = await fetch("http://localhost:3500/videos", {
+    const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -109,12 +109,20 @@ const Thumbnail = ({ video }) => {
     navigate(`/${user.username}/${videoID}`)
   }
 
-
+  useEffect(()=>{
+    console.log(video.videoInfo?.snippet.thumbnails.default.url)
+  }, [])
 
 
   return (
     <div className='w-full flex-shrink-0 h-fit mb-8' >
-      <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' onClick={handleViewVideo} />
+      <div className="bg-wd dark:bg-bd w-full h-48 rounded-lg bgimg" onClick={handleViewVideo} 
+        style={{
+
+          background: `url(${video.videoInfo?.snippet?.thumbnails?.high?.url})` 
+          // background: `url("https://i.ytimg.com/vi/-AxZCUrVGBM/default.jpg")` 
+        }}
+      />
       <div className='flex justify-between mt-3 px-2 items-start'>
         <div className='w-5/6'>
           <p className='font-bold mb-2' >{title ? title : "Title"}</p>

@@ -18,7 +18,7 @@ const LoginForm = () => {
       pwd: data.get("pwd")
     }
 
-    const response = await fetch("http://localhost:3500/login", {
+    const response = await fetch("http://172.31.26.175:3500/login", {
       method: "POST",
       mode: "cors",
       headers: {
