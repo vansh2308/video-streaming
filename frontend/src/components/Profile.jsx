@@ -3,6 +3,7 @@ import { IoTrashBin } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setWatchLater } from '../features/watchLaterSlice';
+import { setUser } from '../features/userSlice';
 
 const Profile = () => {
   const currentUser = useSelector(state => state.user.value)
@@ -33,20 +34,7 @@ const Profile = () => {
           })
         }
       </div>
-      
-      {/* <div className='w-full flex justify-between items-center'>
-        <p className='text-md my-4 font-semibold'>Your videos</p>
-        <NavLink to="/:user/manage" className="mr-4 text-xs underline text-pd dark:text-p" >Manage</NavLink>
 
-      </div>
-      <div className='flex overflow-scroll'>
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-      </div> */}
     </div>
   )
 }
@@ -56,6 +44,29 @@ export default Profile
 
 
 const Thumbnail = ({video}) => {
+  const currentUser = useSelector(state => state.user.value)
+  const watchLater = useSelector(state => state.watchLater.value)
+  const dispatch = useDispatch()
+
+  const removeFromWatchLater = async () => {
+    let newUser = JSON.parse(JSON.stringify(currentUser))
+    newUser.watchLater.pop(video._id)
+    let updatedWatchLater = watchLater.filter((item) => {return(item._id != video._id)})
+
+
+    await fetch("http://172.31.26.175:3500/user", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: currentUser.username,
+        newUser: newUser
+      })
+    })
+    dispatch(setUser(newUser))
+    dispatch(setWatchLater(updatedWatchLater))
+
+  }
 
   return (
     <div className='w-72 mr-4  flex-shrink-0 h-fit mb-8'>
@@ -69,7 +80,7 @@ const Thumbnail = ({video}) => {
           <p className='font-bold' >{video.videoInfo?.snippet?.title}</p>
           <p className='font-light text-xs mt-2'>{video.videoInfo?.snippet?.channelTitle}</p>
         </div>
-        <button>
+        <button onClick={removeFromWatchLater}>
           <IoTrashBin  className='text-lg' />
         </button>
       </div>

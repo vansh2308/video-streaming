@@ -41,12 +41,25 @@ const logClick = async (req, res) => {
 
 
 const getVideoByIds = async (req, res)=> {
-  const idList = req.body.ids;
-  console.log("hey")
-  
+  const idList = req.body.ids;  
   const vidList = await Video.find({"_id": {$in: idList}})
   return res.status(200).json(vidList)
 }
 
 
-module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIds, logClick }
+const uploadVideo = async (req, res) => {
+  const newVideo = req.body.newVideo
+  const newVid  = await Video.create(newVideo)
+  console.log(newVid)
+
+
+  return res.status(200).json({newVid: newVid})
+}
+
+
+const deleteVideo = async (req, res) => {
+  console.log(req.body.id)
+  return res.status(200).json({"msg": "video deleted!"})
+}
+
+module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIds, logClick, uploadVideo, deleteVideo }

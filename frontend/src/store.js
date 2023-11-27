@@ -4,6 +4,7 @@ import userReducer from "./features/userSlice"
 import videoListReducer from "./features/videoListSlice";
 import currentVideoReducer from "./features/currentVideoSlice"
 import watchLaterReducer from "./features/watchLaterSlice";
+import uploadedVideosReducer from "./features/uploadedVideosSlice";
 
 export default configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
     user: userReducer,
     videoList: videoListReducer,
     currentVideo: currentVideoReducer,
-    watchLater: watchLaterReducer
+    watchLater: watchLaterReducer,
+    uploadedVideos: uploadedVideosReducer
   }
 })
