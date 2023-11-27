@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react'
 import { IoTrashBin } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWatchLater } from '../features/watchLaterSlice';
 
 const Profile = () => {
   const currentUser = useSelector(state => state.user.value)
+  const watchLater = useSelector(state => state.watchLater.value)
+  const dispatch = useDispatch()
+
+ 
 
   return (
     <div className='w-full h-full overflow-scroll' >
@@ -20,14 +25,16 @@ const Profile = () => {
 
       <p className='text-md my-4 font-semibold'>Watch Later</p>
       <div className='flex overflow-scroll'>
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
+        {
+          watchLater.length > 0 && watchLater.map((item) => {
+            return(
+              <Thumbnail video={item} />
+            )
+          })
+        }
       </div>
       
-      <div className='w-full flex justify-between items-center'>
+      {/* <div className='w-full flex justify-between items-center'>
         <p className='text-md my-4 font-semibold'>Your videos</p>
         <NavLink to="/:user/manage" className="mr-4 text-xs underline text-pd dark:text-p" >Manage</NavLink>
 
@@ -39,7 +46,7 @@ const Profile = () => {
         <Thumbnail />
         <Thumbnail />
         <Thumbnail />
-      </div>
+      </div> */}
     </div>
   )
 }
@@ -52,11 +59,15 @@ const Thumbnail = ({video}) => {
 
   return (
     <div className='w-72 mr-4  flex-shrink-0 h-fit mb-8'>
-      <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg ' />
+      <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg bgimg'
+        style={{
+          background: `url(${video.videoInfo?.snippet?.thumbnails?.high?.url})` 
+        }}
+      />
       <div className='flex justify-between mt-3 px-2'>
-        <div>
-          <p className='font-bold' >Title</p>
-          <p className='font-light text-xs'>Channel Title </p>
+        <div className='w-5/6'>
+          <p className='font-bold' >{video.videoInfo?.snippet?.title}</p>
+          <p className='font-light text-xs mt-2'>{video.videoInfo?.snippet?.channelTitle}</p>
         </div>
         <button>
           <IoTrashBin  className='text-lg' />

@@ -9,6 +9,8 @@ import { Outlet } from 'react-router';
 import { useDispatch, useSelector } from "react-redux"
 import { toggle } from "./../features/themeSlice"
 import { useRef } from 'react';
+import { setUser } from '../features/userSlice';
+import { setWatchLater } from '../features/watchLaterSlice'; 
 
 
 
@@ -35,7 +37,9 @@ const User = () => {
   const user = useSelector(state => state.user.value)
 
   const handleLogout = async (e) => {
-    console.log(user.username)
+    dispatch(setUser({}))
+    dispatch(setWatchLater([]))
+
     await fetch("http://172.31.26.175:3500/logout", {
       method: "POST",
       mode: "cors",

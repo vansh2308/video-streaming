@@ -27,14 +27,6 @@ const getVideoByID = async (req, res) => {
 }
 
 
-const getVideoByIDS = async (req, res) => {
-  const idList  = req.body.ids;
-  const vidList = await Video.find({"videoInfo.id": {$in: idList}})
-  return res.status(200).json(vidList)
-  
-}
-
-
 const logClick = async (req, res) => {
   const username = req.body.username;
   const vidID = req.body.id
@@ -47,4 +39,14 @@ const logClick = async (req, res) => {
   return res.status(200).json({"msg": "click logged!"})
 }
 
-module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIDS, logClick }
+
+const getVideoByIds = async (req, res)=> {
+  const idList = req.body.ids;
+  console.log("hey")
+  
+  const vidList = await Video.find({"_id": {$in: idList}})
+  return res.status(200).json(vidList)
+}
+
+
+module.exports = { getAllVideos, updateVideoByID, getVideoByID, getVideoByIds, logClick }

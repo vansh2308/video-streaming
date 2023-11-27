@@ -19,10 +19,22 @@ const userSchema = new Schema({
     required: true
   },
   refreshToken: String,
-  watchLater: [String],
-  createdVideos: [String],
-  likedVideos: [String],
-  dislikedVideos: [String]
+  watchLater: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Video"
+  }],
+  createdVideos: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Video"
+  }],
+  likedVideos:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Video"
+  }],
+  dislikedVideos:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Video"
+  }],
 })
 
 module.exports = mongoose.model('User', userSchema)

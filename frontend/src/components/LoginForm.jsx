@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { setUser } from '../features/userSlice'
+import { setWatchLater } from '../features/watchLaterSlice'
 
 const LoginForm = () => {
   const [error, setError] = useState(" ")
@@ -34,6 +35,19 @@ const LoginForm = () => {
       const res = await response.json()
       dispatch(setUser(res.user))
       navigate(`/:${res.user.username}`) 
+
+
+      const watchLater = await fetch("http://172.31.26.175:3500/login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ids: res.watchLater
+        })
+      })
+      dispatch(setWatchLater(await watchLater.json()))
     }
     return response.status
   }

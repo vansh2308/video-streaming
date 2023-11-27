@@ -21,15 +21,16 @@ export default function VideoViewer(props) {
   
   const handleLike = async (e) => {
     e.preventDefault()
-    if(currUser.likedVideos.includes(currentVideo.videoInfo?.id)) return
     
     let newVideo = JSON.parse(JSON.stringify(currentVideo))
     let newUser = JSON.parse(JSON.stringify(currUser))
+    
+    if(newUser.likedVideos.indexOf(currentVideo._id) > -1) return
     newVideo.videoInfo.statistics.likeCount += 1;
-    newUser.likedVideos.push(currentVideo.videoInfo?.id)
-    if(currUser.dislikedVideos.includes(currentVideo.videoInfo?.id)) {
+    newUser.likedVideos.push(currentVideo._id)
+    if(newUser.dislikedVideos.indexOf(currentVideo._id) > -1) {
       newVideo.videoInfo.statistics.dislikeCount -= 1; 
-      newUser.dislikedVideos.pop(currentVideo.videoInfo?.id)
+      newUser.dislikedVideos.pop(currentVideo._id)
     }
 
 
@@ -44,6 +45,7 @@ export default function VideoViewer(props) {
         newVideo: newVideo
       })
     })
+
     const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
       method: "POST",
       mode: "cors",
@@ -72,15 +74,16 @@ export default function VideoViewer(props) {
   
   const handleDislike = async (e) => {
     e.preventDefault()
-    if(currUser.dislikedVideos.includes(currentVideo.videoInfo?.id)) return
-
+    
     let newVideo = JSON.parse(JSON.stringify(currentVideo))
     let newUser = JSON.parse(JSON.stringify(currUser))
+
+    if(newUser.dislikedVideos.indexOf(currentVideo._id) > -1) return
     newVideo.videoInfo.statistics.dislikeCount += 1;
-    newUser.dislikedVideos.push(currentVideo.videoInfo?.id)
-    if(currUser.likedVideos.includes(currentVideo.videoInfo?.id)) {
+    newUser.dislikedVideos.push(currentVideo._id)
+    if(newUser.likedVideos.indexOf(currentVideo._id) > -1) {
       newVideo.videoInfo.statistics.likeCount -= 1; 
-      newUser.likedVideos.pop(currentVideo.videoInfo?.id)
+      newUser.likedVideos.pop(currentVideo._id)
     }
 
     await fetch("http://172.31.26.175:3500/videos/updateVideo", {
@@ -127,9 +130,9 @@ export default function VideoViewer(props) {
 
   return (
     <div>
-      <div className='w-full h-[20rem] rounded-xl bg-wd dark:bg-bd relative overflow-hidden '
+      <div className='w-full h-[20rem] rounded-xl bg-wd dark:bg-bd relative overflow-hidden bgimg '
         style={{
-          background: `url(${currentVideo.videoInfo?.snippet?.thumbnails?.high?.url})` 
+          background: `url(${currentVideo.videoInfo?.snippet?.thumbnails?.high?.url})`
         }}
       > </div>
 
