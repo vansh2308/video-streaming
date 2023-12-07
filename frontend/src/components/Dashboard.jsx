@@ -19,7 +19,7 @@ const Dashboard = () => {
     const query = new FormData(e.target)
     setSearchKey(query.get("search"))
 
-    let res = await fetch("http://172.31.26.175:3500/videos", {
+    let res = await fetch("http://172.30.17.39:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -81,7 +81,7 @@ const Thumbnail = ({ video, key, searchKey }) => {
     e.preventDefault()
     let newVideo = JSON.parse(JSON.stringify(video))
     newVideo.videoInfo.statistics.viewCount += 1;
-    await fetch("http://172.31.26.175:3500/videos/updateVideo", {
+    await fetch("http://172.30.17.39:3500/videos/updateVideo", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -93,7 +93,7 @@ const Thumbnail = ({ video, key, searchKey }) => {
       })
     })
 
-    await fetch("http://172.31.26.175:3500/videos/logClick", {
+    await fetch("http://172.30.17.39:3500/videos/logClick", {
       method: "POST",
       mode: "cors",
       headers: {"Content-Type": "application/json",},
@@ -103,7 +103,7 @@ const Thumbnail = ({ video, key, searchKey }) => {
       })
     })
 
-    const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
+    const newVideolist = await fetch("http://172.30.17.39:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -123,7 +123,7 @@ const Thumbnail = ({ video, key, searchKey }) => {
     if(newUser.watchLater.indexOf(video._id) > -1) return 
     newUser.watchLater.push(video._id)
 
-    await fetch("http://172.31.26.175:3500/user", {
+    await fetch("http://172.30.17.39:3500/user", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -135,7 +135,7 @@ const Thumbnail = ({ video, key, searchKey }) => {
 
     dispatch(setUser(newUser))
 
-    const updatedWatchLater = await fetch("http://172.31.26.175:3500/videos/ids", {
+    const updatedWatchLater = await fetch("http://172.30.17.39:3500/videos/ids", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -158,9 +158,9 @@ const Thumbnail = ({ video, key, searchKey }) => {
   return (
     <div className='w-full flex-shrink-0 h-fit mb-8' >
       <div className="bg-wd dark:bg-bd w-full h-48 rounded-lg bgimg" onClick={handleViewVideo} 
-        style={{
-          background: `url(${video.videoInfo?.snippet?.thumbnails?.high?.url})` 
-        }}
+        // style={{
+        //   background: `url(${video.videoInfo?.snippet?.thumbnails?.high?.url})` 
+        // }}
       />
       <div className='flex justify-between mt-3 px-2 items-start'>
         <div className='w-5/6'>

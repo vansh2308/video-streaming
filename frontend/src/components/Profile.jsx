@@ -54,7 +54,7 @@ const Thumbnail = ({video}) => {
     let updatedWatchLater = watchLater.filter((item) => {return(item._id != video._id)})
 
 
-    await fetch("http://172.31.26.175:3500/user", {
+    await fetch("http://172.30.17.39:3500/user", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -71,9 +71,9 @@ const Thumbnail = ({video}) => {
   return (
     <div className='w-72 mr-4  flex-shrink-0 h-fit mb-8'>
       <div className='bg-wd dark:bg-bd w-full h-48 rounded-lg bgimg'
-        style={{
-          background: `url(${video.videoInfo?.snippet?.thumbnails?.high?.url})` 
-        }}
+        // style={{
+        //   background: `url(${video.videoInfo?.snippet?.thumbnails?.high?.url})` 
+        // }}
       />
       <div className='flex justify-between mt-3 px-2'>
         <div className='w-5/6'>

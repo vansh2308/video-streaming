@@ -20,7 +20,7 @@ const LoginForm = () => {
       pwd: data.get("pwd")
     }
 
-    const response = await fetch("http://172.31.26.175:3500/login", {
+    const response = await fetch("http://172.30.17.39:3500/login", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -39,7 +39,7 @@ const LoginForm = () => {
       console.log(res.user)
 
 
-      const watchLater = await fetch("http://172.31.26.175:3500/videos/ids", {
+      const watchLater = await fetch("http://172.30.17.39:3500/videos/ids", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -53,7 +53,7 @@ const LoginForm = () => {
 
 
 
-      let myVideos = await fetch("http://172.31.26.175:3500/videos/ids", {
+      let myVideos = await fetch("http://172.30.17.39:3500/videos/ids", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },

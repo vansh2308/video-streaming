@@ -40,7 +40,7 @@ const User = () => {
     dispatch(setUser({}))
     dispatch(setWatchLater([]))
 
-    await fetch("http://172.31.26.175:3500/logout", {
+    await fetch("http://172.30.17.39:3500/logout", {
       method: "POST",
       mode: "cors",
       headers: {  "Content-Type": "application/json", },

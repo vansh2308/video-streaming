@@ -34,7 +34,7 @@ export default function VideoViewer(props) {
     }
 
 
-    await fetch("http://172.31.26.175:3500/videos/updateVideo", {
+    await fetch("http://172.30.17.39:3500/videos/updateVideo", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -46,7 +46,7 @@ export default function VideoViewer(props) {
       })
     })
 
-    const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
+    const newVideolist = await fetch("http://172.30.17.39:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export default function VideoViewer(props) {
       })
     })
     
-    await fetch("http://172.31.26.175:3500/user", {
+    await fetch("http://172.30.17.39:3500/user", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -86,7 +86,7 @@ export default function VideoViewer(props) {
       newUser.likedVideos.pop(currentVideo._id)
     }
 
-    await fetch("http://172.31.26.175:3500/videos/updateVideo", {
+    await fetch("http://172.30.17.39:3500/videos/updateVideo", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -97,7 +97,7 @@ export default function VideoViewer(props) {
         newVideo: newVideo
       })
     })
-    const newVideolist = await fetch("http://172.31.26.175:3500/videos", {
+    const newVideolist = await fetch("http://172.30.17.39:3500/videos", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -106,7 +106,7 @@ export default function VideoViewer(props) {
       })
     })
 
-    await fetch("http://172.31.26.175:3500/user", {
+    await fetch("http://172.30.17.39:3500/user", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -131,9 +131,9 @@ export default function VideoViewer(props) {
   return (
     <div>
       <div className='w-full h-[20rem] rounded-xl bg-wd dark:bg-bd relative overflow-hidden bgimg '
-        style={{
-          background: `url(${currentVideo.videoInfo?.snippet?.thumbnails?.high?.url})`
-        }}
+        // style={{
+        //   background: `url(${currentVideo.videoInfo?.snippet?.thumbnails?.high?.url})`
+        // }}
       > </div>
 
       <div className='w-full  leading-relaxed font-light mt-10'>

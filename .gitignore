@@ -5,3 +5,4 @@
 Utils
 node_modules
 ./backend/node_modules
+./frontend/src/assets/readme_assets

@@ -59,7 +59,7 @@ function UploadWrapper(props) {
       }
     }
 
-    let res = await fetch("http://172.31.26.175:3500/videos/uploadVideo", {
+    let res = await fetch("http://172.30.17.39:3500/videos/uploadVideo", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -75,7 +75,7 @@ function UploadWrapper(props) {
 
     const updatedUploadedVideos = [...uploadedVideos, newVideo]
     dispatch(setUploadedVideos(updatedUploadedVideos))
-    await fetch("http://172.31.26.175:3500/user", {
+    await fetch("http://172.30.17.39:3500/user", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
